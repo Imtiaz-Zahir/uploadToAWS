@@ -34,6 +34,10 @@ async function main() {
     where:{displayImage:{not:{startsWith:"https://ai-photos-storage.s3-ap-southeast-2.amazonaws.com"}}},
     select: { id: true, prompt: true, displayImage: true },
   });
+  if(images.length === 0) {
+    console.log("No images left to convert.");
+    return;
+  }
 
   for (const image of images) {
 
