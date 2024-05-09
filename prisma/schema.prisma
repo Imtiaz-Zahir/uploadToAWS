@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model photos {
+  id             String   @id @map("_id")
+  v              Int      @map("__v")
+  build_At       DateTime @db.Date
+  channelID      String
+  createdAt      DateTime @db.Date
+  displayImage   String
+  download       Int
+  height         Int
+  prompt         String
+  size           Int
+  thumbnailImage String
+  updatedAt      DateTime @db.Date
+  url            String
+  width          Int
+
+  @@index([download(sort: Desc)], map: "download_-1_autocreated")
+}
+
+model users {
+  id        String   @id @map("_id")
+  image     String
+  joinAt    DateTime @db.Date
+  lastVisit DateTime @db.Date
+  name      String
+}
